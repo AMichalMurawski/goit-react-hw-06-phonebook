@@ -2,6 +2,7 @@ import css from './ContactList.module.css';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
+import { ContactItem } from 'components/ContactItem/ContactItem';
 
 const getFilterContacts = (contacts, filter) => {
   return contacts.filter(contact => contact.name.includes(filter))
@@ -16,15 +17,7 @@ export const ContactList = () => {
     <ul className={css.list}>
     {!!visibleContacts && visibleContacts.map(contact => (
       <li className={css.item} key={contact.id}>
-        <p className={css.contact}>
-          {contact.name}: {contact.number}
-        </p>
-        <button
-          className={css.button}
-          type="button"
-        >
-          Delete
-        </button>
+        <ContactItem contact={contact} />
       </li>
     ))}
     </ul>
