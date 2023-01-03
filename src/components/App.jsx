@@ -26,7 +26,10 @@ export function App() {
   }
 
   function handleSubmit(contact) {
-    if (
+    let newContacts
+    if (!contacts) {
+      newContacts = [contact];
+    } else if (
       contacts.find(
         value =>
           value.name.toLowerCase().replace(/\s/g, '') ===
@@ -35,8 +38,9 @@ export function App() {
     ) {
       alert(`${contact.name} is already in contacts.`);
       return true;
+    } else {
+      newContacts = [...contacts, contact];
     }
-    const newContacts = [...contacts, contact];
     setContacts(newContacts);
     localStorage.setItem(LOCAL_STORAGE_CONTACTS, JSON.stringify(newContacts));
   }
